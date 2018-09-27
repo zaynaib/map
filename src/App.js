@@ -2,6 +2,7 @@
 //https://reactjs.org/docs/faq-ajax.html
 //https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 //https://scotch.io/tutorials/how-to-use-the-javascript-fetch-api-to-get-data
+//https://reactjs.org/docs/faq-ajax.html
 // https://medium.com/@thejasonfile/fetch-vs-axios-js-for-making-http-requests-2b261cdd3af5 ***
 
 import React, { Component } from 'react'
@@ -17,20 +18,19 @@ class App extends Component {
 
   componentDidMount(){
     this.getFourSquareVenues()
-    this.renderMap()
   }
 
   //create API with foursquare
   getFourSquareVenues = () =>{
     //fetch the function
 
-     fetch('https://api.foursquare.com/v2/venues/explore?client_id=X1MSP3S2NAEMOOXXBN1JGB2SXSRTHMFALEEQGNJFGOS4JR1K&client_secret=H5F0ZKW53GMOT0EEFDKAS0X3NM30UXS4AQDSVVE2GHU5OGAI&&v=20180323&near=Chicago&query=musuem&limit=15')
+     fetch('https://api.foursquare.com/v2/venues/explore?client_id=X1MSP3S2NAEMOOXXBN1JGB2SXSRTHMFALEEQGNJFGOS4JR1K&client_secret=H5F0ZKW53GMOT0EEFDKAS0X3NM30UXS4AQDSVVE2GHU5OGAI&&v=20180323&near=Chicago&query=museum')
     .then((response) => response.json())
      .then(data =>{
         // Code for handling API response
         this.setState({
           places:data.response.groups[0].items
-        })
+        }, this.renderMap())
         //console.log(data.response.groups[0].items)
         console.log("working")
   
@@ -54,10 +54,16 @@ class App extends Component {
       zoom: 8
     })  
     //then us map to create markers from venue
-    //var marker = new window.google.maps.Marker({
-
-    //})
-
+    this.state.places.map(place =>{
+            let marker =new window.google.maps.Marker({
+               position :{lat:place.venue.location.lat,lng:place.venue.location.lng},
+               map:map,
+               title:place.venue.name
+            })
+          }
+      
+      )
+   
   }
 
   render() {
