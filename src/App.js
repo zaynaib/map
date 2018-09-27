@@ -28,7 +28,10 @@ class App extends Component {
     .then((response) => response.json())
      .then(data =>{
         // Code for handling API response
-        console.log(data)
+        this.setState({
+          places:data.response.groups[0].items
+        })
+        //console.log(data.response.groups[0].items)
         console.log("working")
   
      })
