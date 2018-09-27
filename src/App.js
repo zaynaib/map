@@ -4,6 +4,7 @@
 //https://scotch.io/tutorials/how-to-use-the-javascript-fetch-api-to-get-data
 //https://reactjs.org/docs/faq-ajax.html
 // https://medium.com/@thejasonfile/fetch-vs-axios-js-for-making-http-requests-2b261cdd3af5 ***
+//https://scotch.io/tutorials/lazy-loading-routes-in-react
 
 import React, { Component } from 'react'
 import './App.css'
@@ -24,8 +25,9 @@ class App extends Component {
   getFourSquareVenues = () =>{
     //fetch the function
 
-     fetch('https://api.foursquare.com/v2/venues/explore?client_id=X1MSP3S2NAEMOOXXBN1JGB2SXSRTHMFALEEQGNJFGOS4JR1K&client_secret=H5F0ZKW53GMOT0EEFDKAS0X3NM30UXS4AQDSVVE2GHU5OGAI&&v=20180323&near=Chicago&query=museum')
-    .then((response) => response.json())
+  fetch('https://api.foursquare.com/v2/venues/explore?client_id=X1MSP3S2NAEMOOXXBN1JGB2SXSRTHMFALEEQGNJFGOS4JR1K&client_secret=H5F0ZKW53GMOT0EEFDKAS0X3NM30UXS4AQDSVVE2GHU5OGAI&&v=20180323&near=Chicago&query=museum')
+  //body.json() returns a promise it stringifies the response of the api call  
+  .then((response) => response.json())
      .then(data =>{
         // Code for handling API response
         this.setState({
@@ -53,13 +55,26 @@ class App extends Component {
       center: {lat: 41.8781, lng: -87.6298},
       zoom: 8
     })  
+
+    //create infowindow
+    var infowindow = new window.google.maps.InfoWindow();
+
     //then us map to create markers from venue
     this.state.places.map(place =>{
+      var contentString = `${place.venue.name}`
+
             let marker =new window.google.maps.Marker({
                position :{lat:place.venue.location.lat,lng:place.venue.location.lng},
                map:map,
                title:place.venue.name
             })
+
+            marker.addListener('click', function() {
+              //Change the content
+              infowindow.setContent(contentString)
+              //Open info window
+              infowindow.open(map, marker);
+            });
           }
       
       )
