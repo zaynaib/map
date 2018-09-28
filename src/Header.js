@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
+import {Navbar} from 'react-materialize'
+
 
 class Header extends Component{
     render(){
