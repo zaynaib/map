@@ -10,6 +10,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import SideBar from './SideBar';
+import Header from './Header';
 
 /*class App extends Component{
   render(){
@@ -97,9 +98,11 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-      
+       <Header />
         <main>
+        
           <div id="map"></div>
+        
         </main>
         
         <SideBar places ={this.state.places}/>

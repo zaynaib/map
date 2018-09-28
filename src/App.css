@@ -33,6 +33,8 @@ main{
 }
 #map {
   height: 100vh;
+  position: static !important;
+  overflow:visible;
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
@@ -44,6 +46,11 @@ html, body {
 .container{
   display:flex;
   
+}
+.title{
+  position:fixed;
+  z-index: 1;
+  text-align: right;
 }
 
 .sidenav{

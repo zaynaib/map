@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import './App.css'
 
-Header = () => {
-    return <h1 className="Title">Neighborhood Map</h1>;
+class Header extends Component{
+    render(){
+      return(
+       <h1 className="title">Neighborhood Map</h1>
+      )
+    }
   }
+  export default Header
