@@ -1,29 +1,7 @@
-//https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
-//https://reactjs.org/docs/faq-ajax.html
-//https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-//https://scotch.io/tutorials/how-to-use-the-javascript-fetch-api-to-get-data
-//https://reactjs.org/docs/faq-ajax.html
-// https://medium.com/@thejasonfile/fetch-vs-axios-js-for-making-http-requests-2b261cdd3af5 ***
-//https://scotch.io/tutorials/lazy-loading-routes-in-react
-//https://reactpatterns.com/
+import React, { Component } from 'react'
+import './App.css'
 
-import React, { Component } from 'react';
-import './App.css';
-import SideBar from './SideBar';
-
-/*class App extends Component{
-  render(){
-    return(
-      <div>
-        <Container/>
-      </div>
-
-    )
-  }
-}*/
-
-
-class App extends Component {
+class Container extends Component {
   constructor(props){
     super(props);
     this.state ={
@@ -47,7 +25,8 @@ class App extends Component {
         this.setState({
           places:data.response.groups[0].items
         }, this.renderMap())
-        
+        //console.log(data.response.groups[0].items)
+        console.log("working")
   
      })
      .catch((err) =>{console.log('There is a problem',err)})
@@ -88,23 +67,15 @@ class App extends Component {
               //Open info window
               infowindow.open(map, marker);
             });
-          }
-      
-      )
+          })
    
   }
 
   render() {
     return (
-      <div className="container">
-      
-        <main>
-          <div id="map"></div>
-        </main>
-        
-        <SideBar places ={this.state.places}/>
-
-      </div>
+      <main>
+        <div id="map"></div>
+      </main>
     )
   }
 }
@@ -118,5 +89,4 @@ function loadScript(url) {
   index.parentNode.insertBefore(script, index)
 }
 
-
-export default App;
+export default Container;
