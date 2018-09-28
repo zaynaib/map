@@ -101,9 +101,9 @@ class App extends Component {
         <Header />
 
         <SideBar places ={this.state.places}/>
-        
-        <div id="map"></div>
-
+        <main>
+          <div id="map"></div>
+        </main>
         
 
       </div>
