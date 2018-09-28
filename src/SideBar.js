@@ -1,8 +1,21 @@
 //https://www.w3schools.com/howto/howto_js_sidenav.asp
 
 import React, { Component } from 'react'
+import M from "materialize-css/dist/js/materialize.min.js";
+import "materialize-css/dist/css/materialize.min.css";
+import {SideNav} from 'react-materialize'
 
 class SideBar extends Component{
+
+
+
+ DOMContentLoaded = () =>{
+  var elems = document.querySelectorAll('.sidenav');
+  var instances = M.Sidenav.init(elems, {
+    edge: "left",
+    inDuration: 250
+  })
+ }
 
  
     render(){
@@ -12,18 +25,21 @@ class SideBar extends Component{
         //console.log(places, "side")
    
         return(
-          <nav className ="sidenav">
+          <div>
+          <ul id="slide-out" className ="sidenav">
           {/*places.map(place => (<div>{place.venue.id}</div>))*/}
            {console.log(places[0].venue.name)}
-           <ul>
+           
            {places.map((place) =>
    
               <li key={place.venue.id}><a>{place.venue.name}</a></li>
 
             )}
-            </ul>
-           
-          </nav>
+            
+
+          </ul>
+          <a href="#" data-target="slide-out" className="sidenav-trigger" onClick={this.DOMContentLoaded}><i className="material-icons">menu</i></a>
+          </div>
     
         )
 

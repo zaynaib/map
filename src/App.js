@@ -98,14 +98,12 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-       <Header />
-        <main>
+        <Header />
+
         <SideBar places ={this.state.places}/>
-
-          <div id="map"></div>
-
         
-        </main>
+        <div id="map"></div>
+
         
 
       </div>
