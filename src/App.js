@@ -100,12 +100,13 @@ class App extends Component {
       <div className="container">
        <Header />
         <main>
-        
+        <SideBar places ={this.state.places}/>
+
           <div id="map"></div>
+
         
         </main>
         
-        <SideBar places ={this.state.places}/>
 
       </div>
     )

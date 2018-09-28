@@ -33,8 +33,10 @@ main{
 }
 #map {
   height: 100vh;
-  position: static !important;
+  /*position: static !important;*/
   overflow:visible;
+  float:left;
+  width:85%;
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
@@ -45,30 +47,38 @@ html, body {
 
 .container{
   display:flex;
-  
-}
-.title{
-  position:fixed;
-  z-index: 1;
-  text-align: right;
+  flex-direction: column;
 }
 
+header {
+  background-color: #666;
+  padding: 10px;
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  z-index: 1;
+}
+
+
 .sidenav{
-  height: 100%;
-    width: 180px;
-    position: fixed;
-    z-index: 1;
+  float:left;
+  width: 15%;
+  z-index: 1;
+  height: 100vh;
+  background-color: #666;
+  color:black;
+  
     top: 0;
     left: 0;
-    background-color: #111;
     overflow-x: hidden;
     padding-top: 20px;
+    
 }
 .sidenav a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 12px;
-  color: #818181;
+  color: white;
   display: block;
 }
 
