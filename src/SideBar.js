@@ -54,7 +54,7 @@ class SideBar extends Component{
       }
       else{
         return(
-          <div>Type in the search box for sidebar to appear</div>
+          <div>Type in the search box  and press enter for sidebar to appear</div>
         )
       }
     
