@@ -10,7 +10,6 @@ class SideBar extends Component{
     super()
 
     //why is this null?
-    console.log(this.props)
   }
 
 
@@ -27,6 +26,7 @@ class SideBar extends Component{
  
     render(){
       //places is rendered on the map asynchrously the inital state will be an empty array
+      //console.log(this.props)
 
       //have to check if the state has bee populated
       if(this.props.places.length !== 0){
@@ -34,7 +34,6 @@ class SideBar extends Component{
    
         return(
           <div>
-            <SearchBar/>
 
           {/* loop over all the venues from foursquare api*/}
           <ul id="slide-out" className ="sidenav">

@@ -20,12 +20,31 @@ class SearchBar extends Component{
     this.setState({
       query:query
     })
+    this.updateSearchedPlaces(query)
 }
 
 
-    handleChange = (event) =>{
-        this.setState({query:event.target.value})
+
+updateSearchedPlaces = (query) =>{
+    //if someone preforms a query
+    if(query){
+        let filteredPlaces = this.props.places
+
+
+        
+        this.setState({
+            searchedPlaces: filteredPlaces
+          })
+        
+        //check to see if the query-word is in the props.places array
+      
     }
+    //if there is no query then just return the just set the state of searchplaces as the original
+    //this props.places array
+  
+}
+
+   
 
     
   handleSubmit = (event) => {
@@ -33,18 +52,20 @@ class SearchBar extends Component{
     event.preventDefault();
   }
     render(){
-        console.log(this.props)
 
         return(
             <div>
             <form onSubmit={this.handleSubmit}>
                 <label>
                     Search For Museum:
-                    <input type="text" value={this.state.query} onChange={this.handleChange}/>
+                    <input type="text" value={this.state.query} onChange={(event) =>
+                         this.updateQuery(event.target.value)}/>
+
                 </label>
                 <input type="submit" value="Submit" />
 
             </form>
+                <SideBar places={this.props.places} searchedPlaces={this.props.searchedPlaces}/>
             </div>
         )
     }
