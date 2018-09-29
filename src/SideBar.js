@@ -3,14 +3,9 @@
 import React, { Component } from 'react'
 import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
-import SearchBar from './SearchBar'
 
 class SideBar extends Component{
-  constructor(){
-    super()
 
-    //why is this null?
-  }
 
 
  DOMContentLoaded = () =>{

@@ -9,7 +9,6 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import SideBar from './SideBar';
 import Header from './Header';
 import SearchBar from './SearchBar';
 
@@ -22,8 +21,12 @@ class App extends Component {
   }
 
   componentDidMount(){
+    window.gm_authFailure = this.gm_authFailure;
     this.getFourSquareVenues()
   }
+  gm_authFailure(){
+    window.alert("Google Maps error!")
+}
 
   //create API with foursquare
   getFourSquareVenues = () =>{
@@ -63,7 +66,7 @@ class App extends Component {
     var infowindow = new window.google.maps.InfoWindow();
 
     //then use map to create markers from venue
-    this.state.places.map(place =>{
+    this.state.places.map(place => {
             var contentString = `${place.venue.name}`
 
             let marker =new window.google.maps.Marker({
@@ -108,6 +111,7 @@ function loadScript(url) {
   script.src = url
   script.async = true
   script.defer = true
+  script.onerror = function(){window.alert("The Google Maps API failed to load data!")}
   index.parentNode.insertBefore(script, index)
 }
 

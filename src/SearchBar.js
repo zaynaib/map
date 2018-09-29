@@ -28,14 +28,23 @@ class SearchBar extends Component{
 updateSearchedPlaces = (query) =>{
     //if someone preforms a query
     if(query){
-        let filteredPlaces = this.props.places
+        if(this.props.places.length !== 0){
+            let filteredPlaces = this.props.places
+            //console.log(filteredPlaces)
 
 
-        
-        this.setState({
-            searchedPlaces: filteredPlaces
-          })
-        
+            filteredPlaces = filteredPlaces.filter((place) => {
+                let placeName = place.venue.name.toLowerCase().search(query.toLowerCase()) !== -1;
+                return placeName
+            })
+    
+            this.setState({
+                searchedPlaces: filteredPlaces
+              })
+            
+
+        }
+      
         //check to see if the query-word is in the props.places array
       
     }
