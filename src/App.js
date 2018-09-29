@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SideBar from './SideBar';
 import Header from './Header';
+import SearchBar from './SearchBar';
 
 class App extends Component {
   constructor(props){
@@ -89,7 +90,8 @@ class App extends Component {
       <div className="container">
         <Header />
 
-        <SideBar places ={this.state.places}/>
+        {/*<SideBar places ={this.state.places}/>*/}
+        <SearchBar places ={this.state.places}/>
         <main>
           <div id="map"></div>
         </main>

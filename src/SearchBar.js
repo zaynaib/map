@@ -3,12 +3,25 @@
 //https://codepen.io/mtclmn/pen/QyPVJp?editors=1010
 
 import React, {Component} from 'react'
+import SideBar from './SideBar'
 
 class SearchBar extends Component{
     constructor(props){
         super(props);
-        this.state ={query:'' };
+        this.state ={
+            query:'' ,
+            searchedPlaces:[]
+        }
     }
+
+
+    
+  updateQuery = (query) =>{
+    this.setState({
+      query:query
+    })
+}
+
 
     handleChange = (event) =>{
         this.setState({query:event.target.value})
@@ -20,7 +33,10 @@ class SearchBar extends Component{
     event.preventDefault();
   }
     render(){
+        console.log(this.props)
+
         return(
+            <div>
             <form onSubmit={this.handleSubmit}>
                 <label>
                     Search For Museum:
@@ -29,6 +45,7 @@ class SearchBar extends Component{
                 <input type="submit" value="Submit" />
 
             </form>
+            </div>
         )
     }
 }
