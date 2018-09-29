@@ -29,10 +29,11 @@ class SideBar extends Component{
       //places is rendered on the map asynchrously the inital state will be an empty array
       //console.log(this.props)
 
-      //have to check if the state has bee populated
-      
+      //have to check if the state has bee populated      
+
       if(this.props.places.length !== 0){
         const places = this.props.places;
+
    
         return(
           <div>
