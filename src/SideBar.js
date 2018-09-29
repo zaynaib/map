@@ -15,7 +15,7 @@ class SideBar extends Component{
     inDuration: 250,
     closeOnClick: true,
     onOpenStart: function () {
-      console.log("I trigger as soon as the page is loaded");
+      alert("Search is triggered press okay to see results");
   },
   onCloseEnd: function () {
       console.log("same");
@@ -54,7 +54,7 @@ class SideBar extends Component{
       }
       else{
         return(
-          <div>404 Not Found</div>
+          <div>Type in the search box for sidebar to appear</div>
         )
       }
     

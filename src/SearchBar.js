@@ -72,7 +72,6 @@ updateSearchedPlaces = (query) =>{
                          this.updateQuery(event.target.value)}/>
 
                 </label>
-                <input type="submit" value="Submit" />
 
             </form>
                 <SideBar places={this.state.searchedPlaces} />
