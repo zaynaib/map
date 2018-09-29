@@ -27,13 +27,18 @@ class SearchBar extends Component{
 
 updateSearchedPlaces = (query) =>{
     //if someone preforms a query
+    //check to see if the query-word is in the props.places array
+
     if(query){
+        //the map is updated aschysounsly we have to check if there is an empty array
         if(this.props.places.length !== 0){
+            //if there are venues that are loaded then we put them in a variable
             let filteredPlaces = this.props.places
-            //console.log(filteredPlaces)
-
-
+            
+            //we filter the venue results from foursquare using the filter method
             filteredPlaces = filteredPlaces.filter((place) => {
+                //change both query and venue name from 4square to lower case to compare
+                //if the letters from the query are in the venue then return the results
                 let placeName = place.venue.name.toLowerCase().search(query.toLowerCase()) !== -1;
                 return placeName
             })
@@ -44,37 +49,33 @@ updateSearchedPlaces = (query) =>{
             
 
         }
+
+        //if there is no query then give us the full list from foursquare
+        else{
+            this.setState({
+                searchedPlaces: this.props.places
+              })
+        }
       
-        //check to see if the query-word is in the props.places array
       
     }
-    //if there is no query then just return the just set the state of searchplaces as the original
-    //this props.places array
-  
-}
-
-   
-
     
-  handleSubmit = (event) => {
-    console.log('A name was submitted: ' + this.state.query);
-    event.preventDefault();
-  }
+}
     render(){
 
         return(
-            <div>
-            <form onSubmit={this.handleSubmit}>
+            <div >
+            <form className="searchForm" onSubmit={this.handleSubmit}>
                 <label>
                     Search For Museum:
-                    <input type="text" value={this.state.query} onChange={(event) =>
+                    <input className="input-field" type="text" value={this.state.query} onChange={(event) =>
                          this.updateQuery(event.target.value)}/>
 
                 </label>
                 <input type="submit" value="Submit" />
 
             </form>
-                <SideBar places={this.props.places} searchedPlaces={this.props.searchedPlaces}/>
+                <SideBar places={this.state.searchedPlaces} />
             </div>
         )
     }

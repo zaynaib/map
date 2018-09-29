@@ -13,7 +13,13 @@ class SideBar extends Component{
   var instances = M.Sidenav.init(elems, {
     edge: "left",
     inDuration: 250,
-    closeOnClick: true
+    closeOnClick: true,
+    onOpenStart: function () {
+      console.log("I trigger as soon as the page is loaded");
+  },
+  onCloseEnd: function () {
+      console.log("same");
+  }
   })
  }
 
@@ -24,6 +30,7 @@ class SideBar extends Component{
       //console.log(this.props)
 
       //have to check if the state has bee populated
+      
       if(this.props.places.length !== 0){
         const places = this.props.places;
    
