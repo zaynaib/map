@@ -65,10 +65,10 @@ updateSearchedPlaces = (query) =>{
 
         return(
             <div >
-            <form className="searchForm" onSubmit={this.handleSubmit}>
+            <form className="searchForm" onSubmit={this.handleSubmit} role="form">
                 <label>
                     Search For Museum:
-                    <input className="input-field" type="text" value={this.state.query} onChange={(event) =>
+                    <input role= "search" className="input-field" type="text" value={this.state.query} onChange={(event) =>
                          this.updateQuery(event.target.value)}/>
 
                 </label>

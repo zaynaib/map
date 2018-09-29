@@ -90,3 +90,7 @@ header {
 
 }
 
+/*For a11y reasons*/
+a:focus{
+ outline: 3px solid blueviolet;
+}

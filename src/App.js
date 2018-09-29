@@ -106,7 +106,7 @@ class App extends Component {
 
         {/*<SideBar places ={this.state.places}/>*/}
         <SearchBar places ={this.state.places} />
-        <main>
+        <main role="main">
           <div id="map"></div>
         </main>
         

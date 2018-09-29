@@ -37,12 +37,12 @@ class SideBar extends Component{
    
         return(
           <div>
-
+            <h2>Museum Locations</h2>
           {/* loop over all the venues from foursquare api*/}
-          <ul id="slide-out" className ="sidenav">
+          <ul id="slide-out" className ="sidenav" role="complementary">
            
            {places.map((place) =>
-              <li key={place.venue.id}><a>{place.venue.name}</a></li>
+              <li key={place.venue.id}><a aria-label={`${place.venue.name}`}>{place.venue.name}</a></li>
             )}
           </ul>
             {/*This is a button to toggle the side menu*/}
