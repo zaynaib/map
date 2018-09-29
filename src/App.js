@@ -12,18 +12,6 @@ import './App.css';
 import SideBar from './SideBar';
 import Header from './Header';
 
-/*class App extends Component{
-  render(){
-    return(
-      <div>
-        <Container/>
-      </div>
-
-    )
-  }
-}*/
-
-
 class App extends Component {
   constructor(props){
     super(props);
@@ -73,7 +61,7 @@ class App extends Component {
     //create infowindow
     var infowindow = new window.google.maps.InfoWindow();
 
-    //then us map to create markers from venue
+    //then use map to create markers from venue
     this.state.places.map(place =>{
             var contentString = `${place.venue.name}`
 
@@ -82,7 +70,8 @@ class App extends Component {
                map:map,
                title:place.venue.name
             })
-
+            
+            //add a function the markers to show the info windows
             marker.addListener('click', function() {
               //Change the content
               infowindow.setContent(contentString)
