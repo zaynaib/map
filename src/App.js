@@ -19,24 +19,28 @@ class App extends Component {
     this.state ={
       mapIsReady:false,
       query:"",
-      Places:[],
-      filtered:null
+      places:[],
+      filtered:[],
+      smarkers:[]
     }
 
     this.updateQuery = this.updateQuery.bind(this);
+    this.initMap = this.initMap.bind(this)
 
   }
 
+  componentWillMount() {
+    this.loadGoogleMapScript();
+  }
   componentDidMount(){
 
     //we load the google map script when its ready
     //we get the venues when they are ready
     this.getVenues()
     
-    
   }
 
-  loadMap(){
+  loadGoogleMapScript(){
 
     const ApiKey = 'AIzaSyD1DrDBUd6GNL2EIBCxK-K0OjkTny8kbuA'
 
@@ -48,41 +52,60 @@ class App extends Component {
     script.addEventListener('load', () =>{
       this.setState({mapIsReady:true})
     });
-    document.body.appendChild(script)
+    window.document.body.appendChild(script)
+
   }
 
   componentDidUpdate(){
+   //once the script is uploaded to the window load up the map
+
+      
+    
+
+     //console.log(this.map)
+     
+      this.initMap()
+
+    
+    }
+
+
+
+  //create markers
+  initMap(){
+    //if map is ready to load
     if(this.state.mapIsReady){
-      let venues = this.state.Places
-       // Create A Map use window so the browser can access it
+
+    // Create A Map use window so the browser can access it
     this.map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 41.8781, lng: -87.6298},
       zoom: 13
-    })  
-     //console.log(this.map)
+        })  
+    
+  //create markers
+  let markers = []
+  let venues = this.state.places
+  let filtered = this.state.filtered
+  console.log(filtered)
 
-     let markers = []
-     let info = []
-
-    //create infowindow
-    let infowindow = new window.google.maps.InfoWindow();
-
-      venues.forEach(place => {
-        let marker = new window.google.maps.Marker({
-          position:{lat:place.venue.location.lat,lng:place.venue.location.lng},
-          map:this.map,
-          id:place.venue.id,
-          name:place.venue.name,
-          animation:window.google.maps.Animation.Drop
-        })
-        markers.push(marker)
+  //create markers from venues
+  filtered.forEach(place => {
+      let marker = new window.google.maps.Marker({
+        position:{lat:place.venue.location.lat,lng:place.venue.location.lng},
+        map:this.map,
+        id:place.venue.id,
+        name:place.venue.name,
+        animation:window.google.maps.Animation.Drop
       })
+      //marker.setMap(null);
 
+      markers.push(marker)
+    
+    })
+    //console.log("mark",markers)
+          }//end of if statement
 
-  
-    }//end of if statement
-
-    }
+  }
 
 
   updateQuery = (query) =>{
@@ -90,35 +113,47 @@ class App extends Component {
       query:query
     })
     this.updateSearchedPlaces(query)
-    console.log(this.markers)
 }
+
+filterVenues(query) {
+  let f = query ? this.venues.filter(v => v.name.toLowerCase().includes(query)) : this.venues;
+  this.markers.forEach(m => {
+    m.name.toLowerCase().includes(query) ?
+    m.setVisible(true) :
+    m.setVisible(false);
+  });
+  this.setState({ filtered: f, query: query });
+}
+
 
   updateSearchedPlaces = (query) =>{
     //if someone preforms a query
     //check to see if the query-word is in the props.places array
 
     if(query){
+      console.log("marker",this.map)
         //the map is updated aschysounsly we have to check if there is an empty array
             //if there are venues that are loaded then we put them in a variable
-            let filteredPlaces = this.state.Places
+            let filteredPlaces = this.state.places
             
             //we filter the venue results from foursquare using the filter method
             filteredPlaces = filteredPlaces.filter((place) => {
                 //change both query and venue name from 4square to lower case to compare
                 //if the letters from the query are in the venue then return the results
                 let placeName = place.venue.name.toLowerCase().search(query.toLowerCase()) !== -1;
+
                 return placeName
             })
 
             this.setState({
-                Places: filteredPlaces
+                filtered: filteredPlaces
               })
             }
 
         //if there is no query then give us the full list from foursquare
         else{
             this.setState({
-                Places: this.state.Places
+                places: this.state.places
               })
         }
       
@@ -141,8 +176,8 @@ getVenues(){
      .then(data =>{
         // Code for handling API response
         this.setState({
-          Places:data.response.groups[0].items
-        },this.loadMap())
+          places:data.response.groups[0].items
+        })
         
   
      })
@@ -154,7 +189,6 @@ getVenues(){
 
 
   render() {
-    console.log(this.markers)
 
     return (
       <div className="container">
@@ -162,7 +196,7 @@ getVenues(){
       
       <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
 
-      <SideBar places={this.state.Places}/>
+      <SideBar places={this.state.places}/>
 
         <main role="main">
           <div id="map"></div>
