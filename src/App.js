@@ -90,7 +90,7 @@ class App extends Component {
   let filtered = this.state.filtered
 
   //create infowindow
-  const infowindow = new window.google.maps.InfoWindow();
+  let infowindow = new window.google.maps.InfoWindow();
 
 
   console.log(filtered)
@@ -106,8 +106,16 @@ class App extends Component {
 
   //create markers from venues
   venues.forEach(place => {
+      //check to see if there are null values
+
+      let name = place.venue.name || 'unknown'
+      let street = place.venue.location.address || 'unknown'
+      let city = place.venue.location.formattedAddress[1] || 'unknown'
+
 
       //setup contents for inforwindow
+      let contentString =  `<div>  <h3>${name}</h3>  <p>${street}</p
+      ><p>${city} </p></div>`
 
       let marker = new window.google.maps.Marker({
         position:{lat:place.venue.location.lat,lng:place.venue.location.lng},
@@ -123,6 +131,15 @@ class App extends Component {
         else { marker.setAnimation(window.google.maps.Animation.BOUNCE); }
         setTimeout(() => { marker.setAnimation(null) }, 3000);
       });
+
+      //add eventListener to markers for infowindow
+      window.google.maps.event.addListener(marker, 'click', () => {
+        infowindow.setContent(contentString);
+        this.map.setZoom(13);
+        this.map.setCenter(marker.position);
+        infowindow.open(this.map, marker);
+        this.map.panBy(0, -125);
+     });
 
       markers.push(marker)
     
