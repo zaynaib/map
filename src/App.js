@@ -21,7 +21,6 @@ class App extends Component {
       query:"",
       places:[],
       filtered:[],
-      smarkers:[]
     }
 
     this.updateQuery = this.updateQuery.bind(this);
@@ -152,6 +151,8 @@ filterVenues(query) {
             }
 
         //if there is no query then give us the full list from foursquare
+        //this else statement is not working for some reason ?????
+        //need some advice on why its not working :)
         else{
             this.setState({
                 filtered: this.state.places
