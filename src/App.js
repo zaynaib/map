@@ -88,14 +88,27 @@ class App extends Component {
   let markers = []
   let venues = null;
   let filtered = this.state.filtered
+
+  //create infowindow
+  const infowindow = new window.google.maps.InfoWindow();
+
+
   console.log(filtered)
+  //updateSearchedPlaces function is not working properly
+  //it does not changed the state of filtered to this.state.places
+  //this if statement is to fix this bug 
+  
   if(filtered.length == 0){
     venues = this.state.places
   }else{
-    venues = this.state.filtered
+    venues = filtered
   }
+
   //create markers from venues
   venues.forEach(place => {
+
+      //setup contents for inforwindow
+
       let marker = new window.google.maps.Marker({
         position:{lat:place.venue.location.lat,lng:place.venue.location.lng},
         map:this.map,
@@ -103,6 +116,13 @@ class App extends Component {
         name:place.venue.name,
         animation:window.google.maps.Animation.Drop
       })
+
+      //add eventListener to markers for animation
+      marker.addListener('click', () => {
+        if (marker.getAnimation() !== null) { marker.setAnimation(null); }
+        else { marker.setAnimation(window.google.maps.Animation.BOUNCE); }
+        setTimeout(() => { marker.setAnimation(null) }, 3000);
+      });
 
       markers.push(marker)
     
