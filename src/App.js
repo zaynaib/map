@@ -112,6 +112,7 @@ class App extends Component {
       let name = place.venue.name || 'unknown'
       let street = place.venue.location.address || 'unknown'
       let city = place.venue.location.formattedAddress[1] || 'unknown'
+      
 
 
       //setup contents for inforwindow
