@@ -14,8 +14,16 @@ import SearchBar from './SearchBar'
 import SideBar from './SideBar'
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 
+
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  
+};
 
 class App extends Component {
   constructor(props){
@@ -177,19 +185,42 @@ getVenues(){
 
 
   render() {
+    const { classes } = this.props;
 
     return (
-      <div className="container">
+      <div>
+      {/*
       <Header/>
       
       <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
 
       <SideBar places={this.state.filtered}/>
-
+        *
         <main role="main">
           <div id="map"></div>
         </main>
+        */}
+
+        <Grid container spacing={24}>
+          <Grid item xs={12}>
+            <Header/>
+          </Grid>
+          <Grid item xs={12}>
+          <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
+        </Grid>
+          <Grid item xs={6}>
+            <SideBar places={this.state.filtered}/>
+
+          </Grid>
+          <Grid item xs={6}>
+            <div id="map"></div>
+
+          </Grid>
+         
         
+      </Grid>
+
+
 
       </div>
     )
@@ -198,4 +229,4 @@ getVenues(){
 
 
 
-export default App;
+export default withStyles(styles)(App);

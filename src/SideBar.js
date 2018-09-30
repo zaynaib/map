@@ -3,27 +3,21 @@
 //https://material-ui.com/api/drawer/
 
 import React, { Component } from 'react'
-import M from "materialize-css/dist/js/materialize.min.js";
-import "materialize-css/dist/css/materialize.min.css";
+import { withStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+
+const styles = {
+
+};
 
 class SideBar extends Component{
 
 
 
- DOMContentLoaded = () =>{
-  var elems = document.querySelectorAll('.sidenav');
-  var instances = M.Sidenav.init(elems, {
-    edge: "left",
-    inDuration: 250,
-    closeOnClick: true,
-    onOpenStart: function () {
-      alert("Search is triggered press okay to see results");
-  },
-  onCloseEnd: function () {
-      console.log("same");
-  }
-  })
- }
+
 
 
  
@@ -34,19 +28,40 @@ class SideBar extends Component{
       //have to check if the state has bee populated      
 
         const places = this.props.places;
+        const { classes } = this.props;
 
+        <List component="nav">
+        <ListItem button>
+          <ListItemText primary="Field Muesum" />
+        </ListItem>
+        <ListItem button>
+          <ListItemText primary="Drafts" />
+        </ListItem>
+      </List>
    
         return(
           <div>
 
-          {/* loop over all the venues from foursquare api*/}
+          {/* loop over all the venues from foursquare api
           <ul id="slide-out" className ="side-nav" role="complementary">
            
            {places.map((place) =>
               <li key={place.venue.id}><a aria-label={`${place.venue.name}`}>{place.venue.name}</a></li>
             )}
           </ul>
-            {/*This is a button to toggle the side menu*/}
+          */}
+
+          <List className="side-nav" role="complementary">
+          {places.map((place) =>
+              <ListItem key={place.venue.id}>
+                  <a aria-label={`${place.venue.name}`}>
+                  <ListItemText primary={`${place.venue.name}`}/>
+                  </a>
+              </ListItem>
+            )}
+            
+
+          </List>
           </div>
     
         )
@@ -58,4 +73,4 @@ class SideBar extends Component{
 
   }
 
-export default SideBar;
+export default withStyles(styles)(SideBar);
