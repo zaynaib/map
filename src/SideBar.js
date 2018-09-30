@@ -14,12 +14,7 @@ const styles = {
 };
 
 class SideBar extends Component{
-
-
-
-
-
-
+ 
  
     render(){
       //places is rendered on the map asynchrously the inital state will be an empty array
@@ -29,6 +24,8 @@ class SideBar extends Component{
 
         const places = this.props.places;
         const { classes } = this.props;
+
+        //console.log(this.props)
    
         return(
           <div>

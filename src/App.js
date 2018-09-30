@@ -125,7 +125,6 @@ class App extends Component {
         name:place.venue.name,
         animation:window.google.maps.Animation.Drop
       })
-
       //add eventListener to markers for animation
       marker.addListener('click', () => {
         if (marker.getAnimation() !== null) { marker.setAnimation(null); }
@@ -247,7 +246,7 @@ getVenues(){
           <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
         </Grid>
           <Grid item xs={6}>
-            <SideBar places={this.state.filtered}/>
+            <SideBar places={this.state.filtered} map={this.map}/>
 
           </Grid>
           <Grid item xs={6}>
