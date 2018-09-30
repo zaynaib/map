@@ -57,22 +57,21 @@ header {
 }
 
 
-.sidenav{
+.side-nav{
   float:left;
   width: 15%;
   z-index: 1;
   height: 100vh;
   background-color: #666;
   color:black;
-  
+  position: absolute;
     top: 0;
     left: 0;
-    overflow-x: hidden;
     padding-top: 20px;
     
 }
 
-.sidenav li > a {
+.side-nav li > a {
   color: rgba(0, 0, 0, 0.87);
   display: block;
   font-size: 14px;

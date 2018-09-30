@@ -1,5 +1,7 @@
 //https://www.w3schools.com/howto/howto_js_sidenav.asp
 
+//https://material-ui.com/api/drawer/
+
 import React, { Component } from 'react'
 import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
@@ -38,14 +40,13 @@ class SideBar extends Component{
           <div>
 
           {/* loop over all the venues from foursquare api*/}
-          <ul id="slide-out" className ="sidenav" role="complementary">
+          <ul id="slide-out" className ="side-nav" role="complementary">
            
            {places.map((place) =>
               <li key={place.venue.id}><a aria-label={`${place.venue.name}`}>{place.venue.name}</a></li>
             )}
           </ul>
             {/*This is a button to toggle the side menu*/}
-            <a  data-target="slide-out" className="sidenav-trigger" onClick={this.DOMContentLoaded}><i className="material-icons">menu</i></a>
           </div>
     
         )

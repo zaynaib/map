@@ -12,6 +12,10 @@ import './App.css';
 import Header from './Header'
 import SearchBar from './SearchBar'
 import SideBar from './SideBar'
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
+
 
 class App extends Component {
   constructor(props){
