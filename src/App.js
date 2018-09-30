@@ -198,12 +198,21 @@ gm_authFailure(){
     window.alert("Google Maps error!")
 }
 
+
+ handleErrors(response) {
+  if (!response.ok) {
+      throw Error(response.statusText);
+  }
+  return response;
+}
+
 //get places for foursquare
 getVenues(){
   
   //fetch the function
   fetch('https://api.foursquare.com/v2/venues/explore?client_id=X1MSP3S2NAEMOOXXBN1JGB2SXSRTHMFALEEQGNJFGOS4JR1K&client_secret=H5F0ZKW53GMOT0EEFDKAS0X3NM30UXS4AQDSVVE2GHU5OGAI&&v=20180323&near=Chicago&query=museum')
   //body.json() returns a promise it stringifies the response of the api call  
+  .then(this.handleErrors)
   .then((response) => response.json())
      .then(data =>{
         // Code for handling API response
@@ -245,7 +254,7 @@ getVenues(){
           <Grid item xs={12}>
           <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
         </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} >
             <SideBar places={this.state.filtered} map={this.map}/>
 
           </Grid>

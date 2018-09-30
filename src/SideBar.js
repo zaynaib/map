@@ -30,15 +30,6 @@ class SideBar extends Component{
         return(
           <div>
 
-          {/* loop over all the venues from foursquare api
-          <ul id="slide-out" className ="side-nav" role="complementary">
-           
-           {places.map((place) =>
-              <li key={place.venue.id}><a aria-label={`${place.venue.name}`}>{place.venue.name}</a></li>
-            )}
-          </ul>
-          */}
-
           <List className="side-nav" role="complementary">
           {places.map((place) =>
               <ListItem key={place.venue.id} tabIndex={0}>
