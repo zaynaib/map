@@ -41,7 +41,7 @@ class SideBar extends Component{
 
           <List className="side-nav" role="complementary">
           {places.map((place) =>
-              <ListItem key={place.venue.id}>
+              <ListItem key={place.venue.id} tabIndex={0}>
                   <a aria-label={`${place.venue.name}`}>
                   <ListItemText primary={`${place.venue.name}`}/>
                   </a>
