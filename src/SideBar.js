@@ -29,15 +29,6 @@ class SideBar extends Component{
 
         const places = this.props.places;
         const { classes } = this.props;
-
-        <List component="nav">
-        <ListItem button>
-          <ListItemText primary="Field Muesum" />
-        </ListItem>
-        <ListItem button>
-          <ListItemText primary="Drafts" />
-        </ListItem>
-      </List>
    
         return(
           <div>

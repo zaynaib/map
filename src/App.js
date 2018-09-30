@@ -7,6 +7,7 @@
 //https://scotch.io/tutorials/lazy-loading-routes-in-react
 //https://reactpatterns.com/
 // venue photos : https://developer.foursquare.com/docs/api/venues/photos
+//remove markers by id: https://www.aspsnippets.com/Articles/Google-Maps-V3-Remove-specific-single-selected-marker.aspx
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Header'
@@ -250,7 +251,7 @@ getVenues(){
 
           </Grid>
           <Grid item xs={6}>
-            <div id="map"></div>
+            <main id="map" role="application"></main>
 
           </Grid>
          
