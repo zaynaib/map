@@ -84,12 +84,15 @@ class App extends Component {
     
   //create markers
   let markers = []
-  let venues = this.state.places
+  let venues = null;
   let filtered = this.state.filtered
-  console.log(filtered)
-
+  if(filtered.length == 0){
+    venues = this.state.places
+  }else{
+    venues = this.state.filtered
+  }
   //create markers from venues
-  filtered.forEach(place => {
+  venues.forEach(place => {
       let marker = new window.google.maps.Marker({
         position:{lat:place.venue.location.lat,lng:place.venue.location.lng},
         map:this.map,
@@ -97,7 +100,6 @@ class App extends Component {
         name:place.venue.name,
         animation:window.google.maps.Animation.Drop
       })
-      //marker.setMap(null);
 
       markers.push(marker)
     
@@ -131,7 +133,6 @@ filterVenues(query) {
     //check to see if the query-word is in the props.places array
 
     if(query){
-      console.log("marker",this.map)
         //the map is updated aschysounsly we have to check if there is an empty array
             //if there are venues that are loaded then we put them in a variable
             let filteredPlaces = this.state.places
@@ -153,7 +154,7 @@ filterVenues(query) {
         //if there is no query then give us the full list from foursquare
         else{
             this.setState({
-                places: this.state.places
+                filtered: this.state.places
               })
         }
       
