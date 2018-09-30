@@ -22,6 +22,9 @@ class App extends Component {
       Places:[],
       filtered:null
     }
+
+    this.updateQuery = this.updateQuery.bind(this);
+
   }
 
   componentDidMount(){
@@ -75,7 +78,6 @@ class App extends Component {
         markers.push(marker)
       })
 
-    console.log("venues",venues)
 
   
     }//end of if statement
@@ -88,7 +90,7 @@ class App extends Component {
       query:query
     })
     this.updateSearchedPlaces(query)
-    console.log(this.state.Places)
+    console.log(this.markers)
 }
 
   updateSearchedPlaces = (query) =>{
@@ -151,52 +153,8 @@ getVenues(){
 
 
 
-
-  initMap = () => {
-
-    // Create A Map
-    const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: {lat: 41.8781, lng: -87.6298},
-      zoom: 13
-    })  
-
-    //create infowindow
-    var infowindow = new window.google.maps.InfoWindow();
-
-    //then use map to create markers from venue
-    this.state.places.map(place => {
-            var contentString = `${place.venue.name}`
-
-            let marker =new window.google.maps.Marker({
-               position :{lat:place.venue.location.lat,lng:place.venue.location.lng},
-               map:map,
-               animation:window.google.maps.Animation.Drop,
-               title:place.venue.name
-            })
-            
-            //add a function the markers to show the info windows
-            marker.addListener('click', function() {
-              //Change the content
-              infowindow.setContent(contentString)
-              //Open info window
-              infowindow.open(map, marker);
-
-              if (marker.getAnimation() !== null) {
-                marker.setAnimation(null);
-              } else {
-                marker.setAnimation(window.google.maps.Animation.BOUNCE);
-              }
-              
-            });
-            return marker;
-
-          }
-      
-      )
-   
-  }
-
   render() {
+    console.log(this.markers)
 
     return (
       <div className="container">
