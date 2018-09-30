@@ -6,7 +6,7 @@
 // https://medium.com/@thejasonfile/fetch-vs-axios-js-for-making-http-requests-2b261cdd3af5 ***
 //https://scotch.io/tutorials/lazy-loading-routes-in-react
 //https://reactpatterns.com/
-
+// venue photos : https://developer.foursquare.com/docs/api/venues/photos
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Header'
@@ -40,7 +40,6 @@ class App extends Component {
   }
 
   loadGoogleMapScript(){
-
     const ApiKey = 'AIzaSyD1DrDBUd6GNL2EIBCxK-K0OjkTny8kbuA'
 
     const script = window.document.createElement('script')
@@ -56,16 +55,8 @@ class App extends Component {
   }
 
   componentDidUpdate(){
-   //once the script is uploaded to the window load up the map
-
-      
-    
-
-     //console.log(this.map)
-     
+   //once the script is uploaded to the window load up the map     
       this.initMap()
-
-    
     }
 
 
@@ -85,6 +76,7 @@ class App extends Component {
   let markers = []
   let venues = null;
   let filtered = this.state.filtered
+  console.log(filtered)
   if(filtered.length == 0){
     venues = this.state.places
   }else{
@@ -116,22 +108,11 @@ class App extends Component {
     this.updateSearchedPlaces(query)
 }
 
-filterVenues(query) {
-  let f = query ? this.venues.filter(v => v.name.toLowerCase().includes(query)) : this.venues;
-  this.markers.forEach(m => {
-    m.name.toLowerCase().includes(query) ?
-    m.setVisible(true) :
-    m.setVisible(false);
-  });
-  this.setState({ filtered: f, query: query });
-}
-
-
   updateSearchedPlaces = (query) =>{
     //if someone preforms a query
     //check to see if the query-word is in the props.places array
 
-    if(query){
+    if(query != ''){
         //the map is updated aschysounsly we have to check if there is an empty array
             //if there are venues that are loaded then we put them in a variable
             let filteredPlaces = this.state.places
@@ -164,7 +145,7 @@ filterVenues(query) {
     
 
 
-  gm_authFailure(){
+gm_authFailure(){
     window.alert("Google Maps error!")
 }
 
@@ -178,7 +159,8 @@ getVenues(){
      .then(data =>{
         // Code for handling API response
         this.setState({
-          places:data.response.groups[0].items
+          places:data.response.groups[0].items,
+          filtered:data.response.groups[0].items
         })
         
   
@@ -198,7 +180,7 @@ getVenues(){
       
       <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
 
-      <SideBar places={this.state.places}/>
+      <SideBar places={this.state.filtered}/>
 
         <main role="main">
           <div id="map"></div>

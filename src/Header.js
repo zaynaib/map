@@ -19,21 +19,11 @@ function Header(props) {
         
 
         <div >
-        <AppBar position="static" color="default">
-        <Toolbar>
-          <Typography variant="title" color="inherit">
-            Photos
-          </Typography>
-          </Toolbar>
-
-        </AppBar>
-
         
-        {/* 
       <header>
          <h1 role="banner">Neighborhood Map</h1>
        </header>
-       */}
+       
 
         </div>
       )

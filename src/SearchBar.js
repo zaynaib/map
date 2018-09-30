@@ -2,7 +2,7 @@
 //https://reactjs.org/docs/thinking-in-react.html
 //https://codepen.io/mtclmn/pen/QyPVJp?editors=1010
 
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 
 class SearchBar extends Component{
 
