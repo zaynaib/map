@@ -9,38 +9,138 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import Header from './Header';
-import SearchBar from './SearchBar';
+import Header from './Header'
+import SearchBar from './SearchBar'
+import SideBar from './SideBar'
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state ={
-      places:[]
+      mapIsReady:false,
+      query:"",
+      Places:[],
+      filtered:null
     }
   }
 
   componentDidMount(){
-    window.gm_authFailure = this.gm_authFailure;
-    this.getFourSquareVenues()
+
+    //we load the google map script when its ready
+    //we get the venues when they are ready
+    this.getVenues()
+    
+    
   }
+
+  loadMap(){
+
+    const ApiKey = 'AIzaSyD1DrDBUd6GNL2EIBCxK-K0OjkTny8kbuA'
+
+    const script = window.document.createElement('script')
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${ApiKey}`
+    script.async = true;
+    script.defer= true;
+    //this is a callback to wait until the code has loaded
+    script.addEventListener('load', () =>{
+      this.setState({mapIsReady:true})
+    });
+    document.body.appendChild(script)
+  }
+
+  componentDidUpdate(){
+    if(this.state.mapIsReady){
+      let venues = this.state.Places
+       // Create A Map use window so the browser can access it
+    this.map = new window.google.maps.Map(document.getElementById('map'), {
+      center: {lat: 41.8781, lng: -87.6298},
+      zoom: 13
+    })  
+     //console.log(this.map)
+
+     let markers = []
+     let info = []
+
+    //create infowindow
+    let infowindow = new window.google.maps.InfoWindow();
+
+      venues.forEach(place => {
+        let marker = new window.google.maps.Marker({
+          position:{lat:place.venue.location.lat,lng:place.venue.location.lng},
+          map:this.map,
+          id:place.venue.id,
+          name:place.venue.name,
+          animation:window.google.maps.Animation.Drop
+        })
+        markers.push(marker)
+      })
+
+    console.log("venues",venues)
+
+  
+    }//end of if statement
+
+    }
+
+
+  updateQuery = (query) =>{
+    this.setState({
+      query:query
+    })
+    this.updateSearchedPlaces(query)
+    console.log(this.state.Places)
+}
+
+  updateSearchedPlaces = (query) =>{
+    //if someone preforms a query
+    //check to see if the query-word is in the props.places array
+
+    if(query){
+        //the map is updated aschysounsly we have to check if there is an empty array
+            //if there are venues that are loaded then we put them in a variable
+            let filteredPlaces = this.state.Places
+            
+            //we filter the venue results from foursquare using the filter method
+            filteredPlaces = filteredPlaces.filter((place) => {
+                //change both query and venue name from 4square to lower case to compare
+                //if the letters from the query are in the venue then return the results
+                let placeName = place.venue.name.toLowerCase().search(query.toLowerCase()) !== -1;
+                return placeName
+            })
+
+            this.setState({
+                Places: filteredPlaces
+              })
+            }
+
+        //if there is no query then give us the full list from foursquare
+        else{
+            this.setState({
+                Places: this.state.Places
+              })
+        }
+      
+    
+}
+    
+
+
   gm_authFailure(){
     window.alert("Google Maps error!")
 }
 
-  //create API with foursquare
-  getFourSquareVenues = () =>{
-    //fetch the function
-
-
+//get places for foursquare
+getVenues(){
+  
+  //fetch the function
   fetch('https://api.foursquare.com/v2/venues/explore?client_id=X1MSP3S2NAEMOOXXBN1JGB2SXSRTHMFALEEQGNJFGOS4JR1K&client_secret=H5F0ZKW53GMOT0EEFDKAS0X3NM30UXS4AQDSVVE2GHU5OGAI&&v=20180323&near=Chicago&query=museum')
   //body.json() returns a promise it stringifies the response of the api call  
   .then((response) => response.json())
      .then(data =>{
         // Code for handling API response
         this.setState({
-          places:data.response.groups[0].items
-        }, this.renderMap())
+          Places:data.response.groups[0].items
+        },this.loadMap())
         
   
      })
@@ -48,10 +148,7 @@ class App extends Component {
    
   }
 
-  renderMap = () => {
-    loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyD1DrDBUd6GNL2EIBCxK-K0OjkTny8kbuA&callback=initMap")
-    window.initMap = this.initMap
-  }
+
 
 
 
@@ -100,12 +197,15 @@ class App extends Component {
   }
 
   render() {
+
     return (
       <div className="container">
-        <Header />
+      <Header/>
+      
+      <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
 
-        {/*<SideBar places ={this.state.places}/>*/}
-        <SearchBar places ={this.state.places} />
+      <SideBar places={this.state.Places}/>
+
         <main role="main">
           <div id="map"></div>
         </main>
@@ -116,15 +216,6 @@ class App extends Component {
   }
 }
 
-function loadScript(url) {
-  var index  = window.document.getElementsByTagName("script")[0]
-  var script = window.document.createElement("script")
-  script.src = url
-  script.async = true
-  script.defer = true
-  script.onerror = function(){window.alert("The Google Maps API failed to load data!")}
-  index.parentNode.insertBefore(script, index)
-}
 
 
 export default App;

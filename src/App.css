@@ -84,9 +84,11 @@ header {
 
 
 
-.searchForm{
+.searchForm input{
+  
   float:right;
   width: 85% !important;
+  
 
 }
 

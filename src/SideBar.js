@@ -31,13 +31,12 @@ class SideBar extends Component{
 
       //have to check if the state has bee populated      
 
-      if(this.props.places.length !== 0){
         const places = this.props.places;
 
    
         return(
           <div>
-            <h2>Museum Locations</h2>
+
           {/* loop over all the venues from foursquare api*/}
           <ul id="slide-out" className ="sidenav" role="complementary">
            
@@ -46,17 +45,12 @@ class SideBar extends Component{
             )}
           </ul>
             {/*This is a button to toggle the side menu*/}
-            <a href="#" data-target="slide-out" className="sidenav-trigger" onClick={this.DOMContentLoaded}><i className="material-icons">menu</i></a>
+            <a  data-target="slide-out" className="sidenav-trigger" onClick={this.DOMContentLoaded}><i className="material-icons">menu</i></a>
           </div>
     
         )
 
-      }
-      else{
-        return(
-          <div>Type in the search box  and press enter for sidebar to appear</div>
-        )
-      }
+      
     
       
     }
