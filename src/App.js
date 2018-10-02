@@ -8,6 +8,7 @@
 //https://reactpatterns.com/
 // venue photos : https://developer.foursquare.com/docs/api/venues/photos
 //remove markers by id: https://www.aspsnippets.com/Articles/Google-Maps-V3-Remove-specific-single-selected-marker.aspx
+//https://stackoverflow.com/questions/49222113/maximum-update-depth-exceeded-this-can-happen-when-a-component-repeatedly-calls
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Header'
@@ -34,6 +35,7 @@ class App extends Component {
       query:"",
       places:[],
       filtered:[],
+      m:[]
     }
 
     this.updateQuery = this.updateQuery.bind(this);
@@ -86,7 +88,7 @@ class App extends Component {
         })  
     
   //create markers
-  let markers = []
+  //let markers = []
   let venues = null;
   let filtered = this.state.filtered
 
@@ -142,7 +144,7 @@ class App extends Component {
         this.map.panBy(0, -125);
      });
 
-      markers.push(marker)
+      this.state.m.push(marker)
     
     })
     //console.log("mark",markers)
