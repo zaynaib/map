@@ -152,7 +152,7 @@ class App extends Component {
     //if someone preforms a query
     //check to see if the query-word is in the props.places array
 
-    if(query != ''){
+    if(query){
         //the map is updated aschysounsly we have to check if there is an empty array
             //if there are venues that are loaded then we put them in a variable
             let filteredPlaces = this.state.places
@@ -170,15 +170,6 @@ class App extends Component {
                 filtered: filteredPlaces
               })
             }
-
-        //if there is no query then give us the full list from foursquare
-        //this else statement is not working for some reason ?????
-        //need some advice on why its not working :)
-        else{
-            this.setState({
-                filtered: this.state.places
-              })
-        }
       
     
 }
@@ -231,17 +222,6 @@ getVenues(){
     console.log(this.state.m)
     return (
       <div>
-      {/*
-      <Header/>
-      
-      <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
-
-      <SideBar places={this.state.filtered}/>
-        *
-        <main role="main">
-          <div id="map"></div>
-        </main>
-        */}
 
         <Grid container spacing={24}>
           <Grid item xs={12}>
