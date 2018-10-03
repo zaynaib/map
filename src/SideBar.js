@@ -14,6 +14,8 @@ const styles = {
 };
 
 class SideBar extends Component{
+
+ 
  
  
     render(){
@@ -23,7 +25,11 @@ class SideBar extends Component{
       //have to check if the state has bee populated      
 
         const places = this.props.places;
+        const markers = this.props.markers
+
         const { classes } = this.props;
+
+     
 
         //console.log(this.props)
    

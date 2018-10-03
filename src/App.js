@@ -1,14 +1,3 @@
-//https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/
-//https://reactjs.org/docs/faq-ajax.html
-//https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-//https://scotch.io/tutorials/how-to-use-the-javascript-fetch-api-to-get-data
-//https://reactjs.org/docs/faq-ajax.html
-// https://medium.com/@thejasonfile/fetch-vs-axios-js-for-making-http-requests-2b261cdd3af5 ***
-//https://scotch.io/tutorials/lazy-loading-routes-in-react
-//https://reactpatterns.com/
-// venue photos : https://developer.foursquare.com/docs/api/venues/photos
-//remove markers by id: https://www.aspsnippets.com/Articles/Google-Maps-V3-Remove-specific-single-selected-marker.aspx
-//https://stackoverflow.com/questions/49222113/maximum-update-depth-exceeded-this-can-happen-when-a-component-repeatedly-calls
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Header'
@@ -16,7 +5,6 @@ import SearchBar from './SearchBar'
 import SideBar from './SideBar'
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 
 
 
@@ -226,16 +214,21 @@ getVenues(){
         
   
      })
-     .catch((err) =>{console.log('There is a problem',err)})
+     .catch((err) =>{alert('There is a problem',err)})
    
   }
+/*
+  markerClick(id){
+      let findMarker = this.state.m.find(marker => marker.id === id);
+      window.google.maps.event.trigger(findMarker,'click');
+  }
 
-
+*/
 
 
   render() {
     const { classes } = this.props;
-
+    console.log(this.state.m)
     return (
       <div>
       {/*
@@ -258,7 +251,7 @@ getVenues(){
           <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
         </Grid>
           <Grid item xs={6} >
-            <SideBar places={this.state.filtered} map={this.map}/>
+            <SideBar places={this.state.filtered} map={this.map} markers={this.m}/>
 
           </Grid>
           <Grid item xs={6}>
