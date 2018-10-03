@@ -38,6 +38,7 @@ class App extends Component {
 
     //we load the google map script when its ready
     //we get the venues when they are ready
+    window.gm_authFailure = this.gm_authFailure;
     this.getVenues()
     
   }
@@ -49,6 +50,7 @@ class App extends Component {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${ApiKey}`
     script.async = true;
     script.defer= true;
+    script.onerror = function(){window.alert("The Google Maps API failed to load data!")}
     //this is a callback to wait until the code has loaded
     script.addEventListener('load', () =>{
       this.setState({mapIsReady:true})
