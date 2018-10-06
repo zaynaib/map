@@ -14,6 +14,16 @@ const styles = {
 };
 
 class SideBar extends Component{
+  //      let marker = this.markers.filter(m => m.venue.id === venue.id)[0];
+
+
+  markerClick(id){
+    console.log(id)
+   // let findMarker = this.props.markers.find(marker => marker.id === id);
+  
+    //console.log(console.log(id))
+    //window.google.maps.event.trigger(findMarker,'click');
+}
 
  
  
@@ -28,10 +38,11 @@ class SideBar extends Component{
         const markers = this.props.markers
 
         const { classes } = this.props;
+        
 
      
 
-        //console.log(this.props)
+        console.log(this.props)
    
         return(
           <div>
@@ -40,7 +51,7 @@ class SideBar extends Component{
           {places.map((place) =>
               <ListItem key={place.venue.id} tabIndex={0}>
                   <a aria-label={`${place.venue.name}`}>
-                  <ListItemText primary={`${place.venue.name}`}/>
+                  <ListItemText primary={`${place.venue.name}`} onClick={this.markerClick(place.venue.id)}/>
                   </a>
               </ListItem>
             )}

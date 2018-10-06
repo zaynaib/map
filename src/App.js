@@ -36,9 +36,10 @@ class App extends Component {
   }
   componentDidMount(){
 
+    window.gm_authFailure = this.gm_authFailure;
+
     //we load the google map script when its ready
     //we get the venues when they are ready
-    window.gm_authFailure = this.gm_authFailure;
     this.getVenues()
     
   }
@@ -210,18 +211,14 @@ getVenues(){
      .catch((err) =>{alert('There is a problem',err)})
    
   }
-/*
-  markerClick(id){
-      let findMarker = this.state.m.find(marker => marker.id === id);
-      window.google.maps.event.trigger(findMarker,'click');
-  }
 
-*/
+
+
 
 
   render() {
     const { classes } = this.props;
-    console.log(this.state.m)
+    //console.log(this.state.m)
     return (
       <div>
 
@@ -233,7 +230,7 @@ getVenues(){
           <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
         </Grid>
           <Grid item xs={6} >
-            <SideBar places={this.state.filtered} map={this.map} markers={this.m}/>
+            <SideBar places={this.state.filtered} map={this.map} markers={this.state.m}/>
 
           </Grid>
           <Grid item xs={6}>
