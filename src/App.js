@@ -212,13 +212,18 @@ getVenues(){
    
   }
 
-
+  markerClick = venueID =>{
+      let findMarker = this.state.m.find(marker => marker.id === venueID);
+    
+      //console.log(venueID)
+      window.google.maps.event.trigger(findMarker,'click');
+  }
 
 
 
   render() {
     const { classes } = this.props;
-    //console.log(this.state.m)
+    console.log(this.state.m)
     return (
       <div>
 
@@ -230,7 +235,7 @@ getVenues(){
           <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
         </Grid>
           <Grid item xs={6} >
-            <SideBar places={this.state.filtered} map={this.map} markers={this.state.m}/>
+            <SideBar places={this.state.filtered} map={this.map} markers={this.state.m} markerClick={this.markerClick}/>
 
           </Grid>
           <Grid item xs={6}>

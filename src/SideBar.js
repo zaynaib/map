@@ -8,8 +8,11 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import Button from '@material-ui/core/Button';
+
 
 const styles = {
+
 
 };
 
@@ -17,14 +20,7 @@ class SideBar extends Component{
   //      let marker = this.markers.filter(m => m.venue.id === venue.id)[0];
 
 
-  markerClick(id){
-    console.log(id)
-   // let findMarker = this.props.markers.find(marker => marker.id === id);
-  
-    //console.log(console.log(id))
-    //window.google.maps.event.trigger(findMarker,'click');
-}
-
+ 
  
  
  
@@ -49,10 +45,16 @@ class SideBar extends Component{
 
           <List className="side-nav" role="complementary">
           {places.map((place) =>
-              <ListItem key={place.venue.id} tabIndex={0}>
-                  <a aria-label={`${place.venue.name}`}>
-                  <ListItemText primary={`${place.venue.name}`} onClick={this.markerClick(place.venue.id)}/>
-                  </a>
+              <ListItem 
+              key={place.venue.id} tabIndex={0}  
+              style={{height: 46}} 
+              button={true}
+              aria-label={`${place.venue.name}`}
+              onClick={() => this.props.markerClick(place.venue.id)}
+              >
+                  
+                  <ListItemText primary={`${place.venue.name}`} />
+                  
               </ListItem>
             )}
             
