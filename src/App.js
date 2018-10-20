@@ -73,7 +73,7 @@ class App extends Component {
     if(this.state.mapIsReady){
 
     // Create A Map use window so the browser can access it
-    this.map = new window.google.maps.Map(document.getElementById('map'), {
+    const map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 41.8781, lng: -87.6298},
       zoom: 13
         })  
@@ -114,10 +114,10 @@ class App extends Component {
 
       let marker = new window.google.maps.Marker({
         position:{lat:place.venue.location.lat,lng:place.venue.location.lng},
-        map:this.map,
+        map:map,
         id:place.venue.id,
         name:place.venue.name,
-        animation:window.google.maps.Animation.Drop
+        animation:window.google.maps.Animation.DROP
       })
       //add eventListener to markers for animation
       marker.addListener('click', () => {
@@ -129,10 +129,10 @@ class App extends Component {
       //add eventListener to markers for infowindow
       window.google.maps.event.addListener(marker, 'click', () => {
         infowindow.setContent(contentString);
-        this.map.setZoom(13);
-        this.map.setCenter(marker.position);
+        map.setZoom(13);
+        map.setCenter(marker.position);
         infowindow.open(this.map, marker);
-        this.map.panBy(0, -125);
+        map.panBy(0, -125);
      });
 
       this.state.m.push(marker)
