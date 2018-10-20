@@ -92,7 +92,7 @@ class App extends Component {
   //it does not changed the state of filtered to this.state.places
   //this if statement is to fix this bug 
   
-  if(filtered.length == 0){
+  if(filtered.length === 0){
     venues = this.state.places
   }else{
     venues = filtered
@@ -157,23 +157,23 @@ class App extends Component {
 
     if(query){
         //the map is updated aschysounsly we have to check if there is an empty array
-            //if there are venues that are loaded then we put them in a variable
-            let filteredPlaces = this.state.places
+        //if there are venues that are loaded then we put them in a variable
+        let filteredPlaces = this.state.places
             
-            //we filter the venue results from foursquare using the filter method
-            filteredPlaces = filteredPlaces.filter((place) => {
-                //change both query and venue name from 4square to lower case to compare
-                //if the letters from the query are in the venue then return the results
-                let placeName = place.venue.name.toLowerCase().search(query.toLowerCase()) !== -1;
+        //we filter the venue results from foursquare using the filter method
+        filteredPlaces = filteredPlaces.filter((place) => {
+        
+          //change both query and venue name from 4square to lower case to compare
+          //if the letters from the query are in the venue then return the results
+          let placeName = place.venue.name.toLowerCase().search(query.toLowerCase()) !== -1;
 
-                return placeName
-            })
+        return placeName
+       })
 
-            this.setState({
-                filtered: filteredPlaces
-              })
-            }
-      
+       this.setState({
+       filtered: filteredPlaces
+       })
+    }
     
 }
     
@@ -220,30 +220,29 @@ getVenues(){
   }
 
 
-
   render() {
-    const { classes } = this.props;
-    console.log(this.state.m)
+    //console.log(this.state.m)
     return (
       <div>
 
-        <Grid container spacing={24}>
-          <Grid item xs={12}>
-            <Header/>
-          </Grid>
-          <Grid item xs={12}>
+      <Grid container spacing={24}>
+
+        <Grid item xs={12}>
+          <Header/>
+        </Grid>
+
+        <Grid item xs={12}>
           <SearchBar query={this.state.query} updateQuery ={this.updateQuery}/>
         </Grid>
-          <Grid item xs={6} >
-            <SideBar places={this.state.filtered} map={this.map} markers={this.state.m} markerClick={this.markerClick}/>
 
-          </Grid>
-          <Grid item xs={6}>
-            <main id="map" role="application"></main>
+        <Grid item xs={5} >
+          <SideBar places={this.state.filtered} map={this.map} markers={this.state.m} markerClick={this.markerClick}/>
+        </Grid>
 
-          </Grid>
-         
-        
+        <Grid item xs={7}>
+          <main id="map" role="application"></main>
+        </Grid>
+
       </Grid>
 
 
@@ -252,7 +251,5 @@ getVenues(){
     )
   }
 }
-
-
 
 export default withStyles(styles)(App);
