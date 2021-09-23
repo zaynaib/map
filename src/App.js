@@ -6,6 +6,9 @@ import SideBar from './SideBar'
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+require('dotenv').config()
+
+
 
 
 const styles = {
@@ -45,8 +48,8 @@ class App extends Component {
   }
 
   loadGoogleMapScript(){
-    const ApiKey = 'AIzaSyD1DrDBUd6GNL2EIBCxK-K0OjkTny8kbuA'
-
+    const ApiKey = process.env.REACT_APP_GKEY;
+    console.log(process.env)
     const script = window.document.createElement('script')
     script.src = `https://maps.googleapis.com/maps/api/js?key=${ApiKey}`
     script.async = true;
